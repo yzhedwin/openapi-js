@@ -7,7 +7,7 @@ import {
   ScheduledTask,
   SerializableColor,
   EModelEvent
-} from './codegen/src/index.js';
+} from '../codegen/src/index.js';
 import swaggerUi from 'swagger-ui-express';
 import fs from 'fs';
 
