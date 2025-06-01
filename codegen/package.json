@@ -4,6 +4,7 @@
   "description": "Object",
   "license": "Unlicense",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
     "test": "mocha --require @babel/register --recursive"
   },
