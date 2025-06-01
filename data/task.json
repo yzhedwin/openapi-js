@@ -1,0 +1,29 @@
+{
+    "modelEvent": "CHANGE",
+    "oldTask": {
+        "id": 0,
+        "groupName": "zzom",
+        "name": "Hehe",
+        "startTime": "1748698558.99903",
+        "endTime": "1748698583.999041",
+        "colour": {
+            "red": 0,
+            "green": 0.5,
+            "blue": 0,
+            "alpha": 1
+        }
+    },
+    "newTask": {
+        "id": 0,
+        "groupName": "zzom",
+        "name": "Hehe",
+        "startTime": "1748698773.7017326",
+        "endTime": "1748698798.7017436",
+        "colour": {
+            "red": 0,
+            "green": 0.5,
+            "blue": 0,
+            "alpha": 1
+        }
+    }
+}

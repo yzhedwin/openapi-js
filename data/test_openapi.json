@@ -1,0 +1,119 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Gantt Chart Schedule API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/mmi/schedule": {
+            "post": {
+                "summary": "Submit a schedule event",
+                "operationId": "submitScheduleEvent",
+                "requestBody": {
+                    "description": "Gantt chart event to process",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GanttChartModelEvent"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Event received successfully"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "GanttChartModelEvent": {
+                "type": "object",
+                "properties": {
+                    "modelEvent": {
+                        "$ref": "#/components/schemas/EModelEvent"
+                    },
+                    "oldTask": {
+                        "$ref": "#/components/schemas/ScheduledTask"
+                    },
+                    "newTask": {
+                        "$ref": "#/components/schemas/ScheduledTask"
+                    }
+                },
+                "required": [
+                    "modelEvent"
+                ]
+            },
+            "ScheduledTask": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "groupName": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "startTime": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "endTime": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "colour": {
+                        "$ref": "#/components/schemas/SerializableColor"
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "SerializableColor": {
+                "type": "object",
+                "properties": {
+                    "red": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "green": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "blue": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "alpha": {
+                        "type": "number",
+                        "format": "float"
+                    }
+                },
+                "required": [
+                    "red",
+                    "green",
+                    "blue",
+                    "alpha"
+                ]
+            },
+            "EModelEvent": {
+                "type": "string",
+                "enum": [
+                    "ADD",
+                    "CHANGE",
+                    "REMOVE"
+                ]
+            }
+        }
+    }
+}
