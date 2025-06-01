@@ -23,7 +23,9 @@ const api = new DefaultApi(apiClient);
 const swaggerDocument = JSON.parse(fs.readFileSync('./data/test_openapi.json', 'utf8'));
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
+app.get('/', (req, res) => {
+  res.redirect('/docs');
+});
 app.post('/api/mmi/schedule', (req, res) => {
   try {
     const body = req.body;
