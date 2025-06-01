@@ -5,8 +5,6 @@ import {
   ApiClient,
   GanttChartModelEvent,
   ScheduledTask,
-  SerializableColor,
-  EModelEvent
 } from '../codegen/src/index.js';
 import swaggerUi from 'swagger-ui-express';
 import fs from 'fs';
@@ -28,29 +26,18 @@ app.get('/', (req, res) => {
 });
 app.post('/api/mmi/schedule', (req, res) => {
   try {
-    const body = req.body;
-
-    const color = new SerializableColor(body.newTask.colour);
-
-    const task = new ScheduledTask({
-      id: body.newTask.id,
-      name: body.newTask.name,
-      groupName: body.newTask.groupName,
-      startTime: body.newTask.startTime,
-      endTime: body.newTask.endTime,
-      colour: color
-    });
+    const { body } = req;
+    if (!body.modelEvent) {
+      throw new Error('modelEvent is required');
+    }
 
     const modelEvent = new GanttChartModelEvent({
       modelEvent: body.modelEvent,
-      oldTask: body.oldTask ? new ScheduledTask(body.oldTask) : null,
-      newTask: task
+      oldTask: body.oldTask ? ScheduledTask.constructFromObject(body.oldTask) : null,
+      newTask: body.newTask ? ScheduledTask.constructFromObject(body.newTask) : null,
     });
 
-    console.log("Received Event:", modelEvent);
-
-    // You can call another API here if needed
-    // api.submitScheduleEvent(modelEvent)
+    console.log("Received Event:", JSON.stringify(modelEvent));
 
     res.status(200).json({ message: "Event received successfully." });
   } catch (err) {
