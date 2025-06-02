@@ -26,15 +26,14 @@ app.get('/', (req, res) => {
 });
 app.post('/api/mmi/schedule', (req, res) => {
   try {
-    const { body } = req;
-    if (!body.modelEvent) {
+    const { payload } = req.body;
+    if (!payload.modelEvent) {
       throw new Error('modelEvent is required');
     }
-
     const modelEvent = new GanttChartModelEvent({
-      modelEvent: body.modelEvent,
-      oldTask: body.oldTask ? ScheduledTask.constructFromObject(body.oldTask) : null,
-      newTask: body.newTask ? ScheduledTask.constructFromObject(body.newTask) : null,
+      modelEvent: payload.modelEvent,
+      oldTask: payload.oldTask ? ScheduledTask.constructFromObject(payload.oldTask) : null,
+      newTask: payload.newTask ? ScheduledTask.constructFromObject(payload.newTask) : null,
     });
 
     console.log("Received Event:", JSON.stringify(modelEvent));

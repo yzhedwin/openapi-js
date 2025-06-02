@@ -511,7 +511,7 @@ export default class ApiClient {
             case 'String':
                 return String(data);
             case 'Date':
-                return ApiClient.parseDate(String(data));
+                return ApiClient.parseDate(data);
             case 'Blob':
                 return data;
             default:

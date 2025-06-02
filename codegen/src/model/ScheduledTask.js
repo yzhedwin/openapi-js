@@ -48,9 +48,9 @@ export default class ScheduledTask {
       if (data.hasOwnProperty('name'))
         obj.name = ApiClient.convertToType(data['name'], 'String');
       if (data.hasOwnProperty('startTime'))
-        obj.startTime = ApiClient.convertToType(data['startTime'], 'Date');
+        obj.startTime = ApiClient.convertToType(data['startTime']*1000, 'Date');
       if (data.hasOwnProperty('endTime'))
-        obj.endTime = ApiClient.convertToType(data['endTime'], 'Date');
+        obj.endTime = ApiClient.convertToType(data['endTime']*1000, 'Date');
       if (data.hasOwnProperty('colour'))
         obj.colour = SerializableColor.constructFromObject(data['colour']);
     }
